@@ -2,28 +2,39 @@ import { auth, db } from "@/firebase";
 import dayjs from "dayjs";
 import {
 	collection,
-	collectionGroup,
+	doc,
 	getCountFromServer,
 	query,
 	where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
-import { GoVerified } from "react-icons/go";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import { toast } from "react-hot-toast";
+import { GoVerified } from "react-icons/go";
 
 const Dashboard = () => {
 	const [user] = useAuthState(auth);
 	const [hits, setHits] = useState<number>();
-	const [notes, setNotes] = useState<number>();
+	const [fetchLoading, setFetchLoading] = useState<boolean>(true);
 
-	const [signOut, loading, error] = useSignOut(auth);
+	const [signOut, _loading, error] = useSignOut(auth);
+
+	const [data, _dloading, derror] = useDocumentData(
+		doc(db, "leaderboard", user?.email?.split("@")[0] || "-"),
+		{
+			snapshotListenOptions: { includeMetadataChanges: true },
+		}
+	);
 
 	useEffect(() => {
 		if (error) {
 			toast.error(error.message);
 		}
-	}, [error]);
+		if (derror) {
+			toast.error(derror.message);
+		}
+	}, [error, derror]);
 
 	useEffect(() => {
 		const callThisNow = async () => {
@@ -33,39 +44,29 @@ const Dashboard = () => {
 					where("users", "array-contains", user?.email?.split("@")[0] || "-")
 				)
 			);
-			console.log("SNAPSHOT DATA COUNT", snapshot.data().count);
-			const snapshot2 = await getCountFromServer(
-				query(
-					collectionGroup(db, "users"),
-					where("user", "==", user?.email?.split("@")[0] || "-")
-				)
-			);
-			console.log("SNAPSHOT DATA COUNT", snapshot.data().count);
 			setHits(snapshot.data().count);
-			setNotes(snapshot2.data().count);
+			setFetchLoading(false);
 		};
 		callThisNow();
 
 		return () => {
-			setNotes(0);
 			setHits(0);
+			setFetchLoading(true);
 		};
 	}, [user]);
 
 	return (
-		<div className="bg-gray-100 rounded-md flex flex-col md:flex-row justify-center gap-8 p-4 pt-8 mt-8">
+		<div className="rounded-md flex flex-col md:flex-row justify-center gap-8 p-4 pt-8 mt-8">
 			<header className="flex flex-col gap-8 sm:flex-row">
 				<div>
 					<div className="avatar">
 						<div className="w-24 rounded-xl">
-							<img src={user?.photoURL || "https://picsum.photos/200/300"} />
+							<img src={user?.photoURL || "https://picsum.photos/200/300"} alt="profile" />
 						</div>
 					</div>
-					<h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-						{user?.displayName}
-					</h2>
+					<h2 className="text-xl font-bold sm:text-3xl">{user?.displayName}</h2>
 
-					<p className="mt-4 text-gray-500 inline-flex items-center gap-2">
+					<p className="mt-4 inline-flex items-center gap-2">
 						{user?.email}
 
 						{!user?.emailVerified && <GoVerified className="text-green-500" />}
@@ -79,22 +80,20 @@ const Dashboard = () => {
 					<div className="stats shadow">
 						<div className="stat text-center">
 							<div className="stat-title">Total Note Entered</div>
-							<div className="stat-value">{notes}</div>
+							<div className="stat-value text-center">
+								{fetchLoading && !data ? `...` : data?.note_entries}
+							</div>
 							<div className="stat-desc">
 								Around Rs{" "}
-								{/* {value?.reduce(
-                                    (accumulator, currentValue) =>
-                                    accumulator + currentValue.denomination_value,
-                                    0
-                                )} */}
+								<strong>{fetchLoading && !data ? `...` : data?.total}</strong>
 							</div>
 						</div>
 					</div>
 					<div className="stats shadow text-center">
 						<div className="stat">
 							<div className="stat-title">Total Hits</div>
-							<div className="stat-value">{hits}</div>
-							<div className="stat-desc">21% more than last month</div>
+							<div className="stat-value">{fetchLoading ? `...` : hits}</div>
+							<div className="stat-desc">More Notes, More Hits</div>
 						</div>
 					</div>
 				</div>

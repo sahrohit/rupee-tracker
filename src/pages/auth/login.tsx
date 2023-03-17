@@ -39,13 +39,11 @@ const LoginPage = () => {
 						</h1>
 
 						<p className="mt-4 leading-relaxed text-gray-500">
-						Why enter notes in this system? Because it`s fun!
-							Why ? Because Tracking is FUN !
+							Why enter notes in this system? Because it`s fun! Why ? Because
+							Tracking is FUN !
 						</p>
 
 						<LoginForm />
-
-						
 					</div>
 				</main>
 			</div>

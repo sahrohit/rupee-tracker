@@ -1,8 +1,8 @@
 import Navbar from "@/components/Navbar";
 import ProfileSection from "@/components/Profile";
+import Footer from "@/components/shared/Footer";
 import { auth } from "@/firebase";
 import { withProtected } from "@/utils/routes";
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const ProfilePage = () => {
@@ -12,6 +12,7 @@ const ProfilePage = () => {
 		<>
 			<Navbar />
 			<ProfileSection user={user} loading={loading} error={error} />
+			<Footer />
 		</>
 	);
 };

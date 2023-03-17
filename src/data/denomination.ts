@@ -1,5 +1,5 @@
 export const DENOMINATIONS = [
-	{ value: 1, label: "1", color: "#818cf8", tailwind_color: "text-indigo-400" },
+	{ value: 1, label: "1", color: "#818cf8", tailwind_color: "bg-indigo-400" },
 	{ value: 2, label: "2", color: "#9cacb3", tailwind_color: "bg-slate-400" },
 	{ value: 5, label: "5", color: "#d56d78", tailwind_color: "bg-red-300" },
 	{ value: 10, label: "10", color: "#ccb8b3", tailwind_color: "bg-stone-300" },
@@ -27,4 +27,29 @@ export const DENOMINATIONS = [
 
 export const colorFromDenomination = (denomination: number) => {
 	return DENOMINATIONS.find((d) => d.value === denomination)?.tailwind_color;
+};
+
+export const colorFromDenominationRadio = (denomination: number) => {
+	switch (denomination) {
+		case 1:
+			return "peer-checked:bg-indigo-400";
+		case 2:
+			return "peer-checked:bg-slate-400";
+		case 5:
+			return "peer-checked:bg-red-300";
+		case 10:
+			return "peer-checked:bg-stone-300";
+		case 20:
+			return "peer-checked:bg-orange-300";
+		case 50:
+			return "peer-checked:bg-sky-300";
+		case 100:
+			return "peer-checked:bg-green-400";
+		case 500:
+			return "peer-checked:bg-stone-400";
+		case 1000:
+			return "peer-checked:bg-gray-400";
+		default:
+			return "peer-checked:bg-blue-500";
+	}
 };

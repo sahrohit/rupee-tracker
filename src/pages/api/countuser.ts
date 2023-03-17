@@ -26,7 +26,7 @@ if (!getApps().length) {
 const db = getFirestore();
 
 type Data = {
-	success: string;
+	dbRes: any;
 };
 
 export default async function handler(
@@ -39,7 +39,10 @@ export default async function handler(
 		data.push(doc.data());
 	});
 
+	console.log(data);
+
 	//Count the number of users from the data array who has the same username
+
 	const count = data.reduce((acc: any, obj: any) => {
 		const key = obj.user;
 		if (!acc[key]) {
@@ -49,15 +52,24 @@ export default async function handler(
 		return acc;
 	}, {});
 
+	let dbRes;
+
 	for (const [key, value] of Object.entries(count)) {
-		await db.collection("users").doc(key).set(
-			{
-				note_entries: value,
-				last_updated: Timestamp.now(),
-			},
-			{ merge: true }
-		);
+		dbRes = await db
+			.collection("leaderboard")
+			.doc(key)
+			.set(
+				{
+					total: data
+						.filter((item: any) => item.user === key)
+						.map((item: any) => item.denomination_value)
+						.reduce((a: any, b: any) => a + b, 0),
+					note_entries: value,
+					last_updated: Timestamp.now(),
+				},
+				{ merge: true }
+			);
 	}
 
-	res.status(200).json({ success: Timestamp.now() });
+	res.status(200).json({ ...dbRes });
 }

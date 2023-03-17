@@ -37,6 +37,8 @@ next-env.d.ts
 
 firebase-admin-key.json
 
+.vs
+
 .env
 .env.local
 .env.development

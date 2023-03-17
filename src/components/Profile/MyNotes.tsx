@@ -1,7 +1,9 @@
+import { colorFromDenomination } from "@/data/denomination";
 import { auth, db } from "@/firebase";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { collectionGroup, query, where } from "firebase/firestore";
+import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 dayjs.extend(relativeTime);
@@ -72,13 +74,14 @@ interface TableRowProps {
 const TableRow = ({ note }: TableRowProps) => {
 	return (
 		<tr className="max-[450px]:flex max-[450px]:flex-col">
-			<th></th>
 			<td>
 				<div className="flex items-center space-x-3">
-					<div className="avatar">
-						<div className="mask mask-squircle w-12 h-12">
-							<img src="https://picsum.photos/200/300" alt="Mockup Image" />
-						</div>
+					<div
+						className={`${colorFromDenomination(
+							note.denomination_value
+						)} w-20 h-10 px-1 text-xl text-right font-semibold`}
+					>
+						{note.denomination_value}
 					</div>
 					<div>
 						<div className="font-bold">{note.note}</div>
@@ -92,12 +95,14 @@ const TableRow = ({ note }: TableRowProps) => {
 				{dayjs(note.timestamp.seconds * 1000).format("MMMM D, YYYY h:mm A")}
 				<br />
 				<span className="badge badge-ghost badge-sm">
-					{dayjs(note.timestamp.seconds * 1000).fromNow(true)}
+					{dayjs(note.timestamp.seconds * 1000).fromNow(true)} ago
 				</span>
 			</td>
 			<td>{note.city}</td>
 			<th>
-				<button className="btn btn-ghost btn-xs">details</button>
+				<Link className="btn btn-ghost btn-xs" href={`/note/${note.note}`}>
+					details
+				</Link>
 			</th>
 		</tr>
 	);
@@ -106,7 +111,6 @@ const TableRow = ({ note }: TableRowProps) => {
 const SkeletonRow = () => {
 	return (
 		<tr className="max-[450px]:flex max-[450px]:flex-col animate-pulse">
-			<th></th>
 			<td>
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
@@ -139,7 +143,6 @@ const SkeletonRow = () => {
 const TableHeaderFooter = () => {
 	return (
 		<tr className="max-[450px]:hidden">
-			<th></th>
 			<th>Note Information</th>
 			<th>Entry Date</th>
 			<th>City</th>

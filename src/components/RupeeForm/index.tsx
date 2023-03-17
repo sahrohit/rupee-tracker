@@ -26,6 +26,7 @@ const INITIAL_VALUES = {
 	prefix_number: "",
 	serial_number: "",
 	city: "",
+	year: "",
 	comments: "",
 };
 
@@ -43,6 +44,10 @@ const RupeeFormSchema = Yup.object().shape({
 		.max(6, "Invalid Serial Number")
 		.required("Required"),
 	city: Yup.string().required("Required"),
+	year: Yup.number()
+		.optional()
+		.max(2100, "Invalid Year max")
+		.min(1900, "Invalid Year"),
 	comments: Yup.string(),
 });
 

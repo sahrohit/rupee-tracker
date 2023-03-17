@@ -1,3 +1,7 @@
+import {
+	colorFromDenomination,
+	colorFromDenominationRadio,
+} from "@/data/denomination";
 import { useField } from "formik";
 import { InputHTMLAttributes, useId } from "react";
 
@@ -49,7 +53,9 @@ const RadioOption = ({ value, label }: RadioOptionsType) => {
 
 			<label
 				htmlFor={id}
-				className="w-16 flex cursor-pointer items-center justify-center rounded-md border border-gray-100 py-2 px-3 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white rounded-none"
+				className={`w-16 flex cursor-pointer items-center justify-center border border-gray-100 py-2 px-3 hover:border-gray-200 ${colorFromDenominationRadio(
+					value
+				)} peer-checked:bg-blue-500 peer-checked:text-white rounded-none`}
 			>
 				<p className="text-md font-medium">{label}</p>
 			</label>

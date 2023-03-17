@@ -44,7 +44,7 @@ const NoteDetail = ({ values }: FormikValues) => {
 
 				<div className="p-8 px-8 sm:px-20 ">
 					{/* border-2 shadow-[inset_0_0_0_1000px_#ec7a5e] */}
-					<div className="flex flex-row gap-4 justify-center h-full items-center bg-wavy ">
+					<div className="flex flex-row gap-4 justify-center h-full items-center bg-wavy text-black">
 						<div className="flex flex-col items-center">
 							<h2 className="devnagiri text-4xl">{values.prefix_text}</h2>
 							<h2 className="devnagiri text-4xl">

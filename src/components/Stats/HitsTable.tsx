@@ -1,51 +1,8 @@
 import { colorFromDenomination } from "@/data/denomination";
-import { auth, db } from "@/firebase";
+import { cesor } from "@/utils/censor";
 import dayjs from "dayjs";
-import { collection, query, where } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-
-const MyHitsTable = () => {
-	const [user] = useAuthState(auth);
-
-	const [value, loading] = useCollectionData(
-		query(
-			collection(db, "hits"),
-			where("users", "array-contains", user?.email?.split("@")[0] || "-")
-		),
-		{
-			snapshotListenOptions: { includeMetadataChanges: true },
-		}
-	);
-
-	return (
-		<div className="lg:col-span-2 lg:py-8">
-			<div className="overflow-x-auto w-full">
-				<table className="table w-full">
-					<thead>
-						<TableHeaderFooter />
-					</thead>
-
-					<tbody className="max-[450px]:border-2">
-						{loading
-							? Array(3)
-									.fill(" ")
-									.map((_value, index) => (
-										<SkeletonRow key={`skeleton-${index}-2`} />
-									))
-							: value?.map((note: any) => (
-									<TableRow key={note.timestamp.seconds} note={note} />
-							  ))}
-					</tbody>
-
-					{/* <tfoot>
-						<TableHeaderFooter />
-					</tfoot> */}
-				</table>
-			</div>
-		</div>
-	);
-};
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 interface TableRow {
 	denomination_label: string;
@@ -79,7 +36,7 @@ interface TableRowProps {
 	note: TableRow;
 }
 
-const TableRow = ({ note }: TableRowProps) => {
+export const TableRow = ({ note }: TableRowProps) => {
 	return (
 		<tr className="max-[450px]:flex max-[450px]:flex-col">
 			<td></td>
@@ -88,7 +45,7 @@ const TableRow = ({ note }: TableRowProps) => {
 				{dayjs(note.timestamp.seconds * 1000).format("MMMM D, YYYY h:mm A")}
 				<br />
 				<span className="badge badge-ghost badge-sm">
-					{dayjs(note.timestamp.seconds * 1000).fromNow(true)}
+					{dayjs(note.timestamp.seconds * 1000).fromNow(true) + " ago"}
 				</span>
 			</td>
 			<td>
@@ -110,11 +67,11 @@ const TableRow = ({ note }: TableRowProps) => {
 			</td>
 			<td>
 				{note.new_city}
-				<div className="text-sm opacity-50">{note.last_city}</div>
+				<div className="text-sm opacity-50">{note.last_city} (last)</div>
 			</td>
 			<td>
-				{note.new_user}
-				<div className="text-sm opacity-50">{note.last_user}</div>
+				{cesor(note.new_user)}
+				<div className="text-sm opacity-50">{cesor(note.last_user)} (last)</div>
 			</td>
 			<td>
 				{dayjs(note.new_timestamp.seconds * 1000).from(
@@ -125,7 +82,7 @@ const TableRow = ({ note }: TableRowProps) => {
 	);
 };
 
-const SkeletonRow = () => {
+export const SkeletonRow = () => {
 	return (
 		<tr className="max-[450px]:flex max-[450px]:flex-col animate-pulse">
 			<td></td>
@@ -134,12 +91,11 @@ const SkeletonRow = () => {
 				<p className="h-4 w-1/3 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
 			</td>
 			<td>
-				<div className="flex items-center space-x-3">
-					<div className="avatar">
-						<div className="flex-shrink-0">
-							<span className="mask mask-squircle w-12 h-12 block bg-gray-200 rounded-xl dark:bg-gray-700"></span>
-						</div>
-					</div>
+				<div className="flex items-center space-x-3 w-full">
+					<div
+						className={`bg-gray-200 dark:bg-gray-700 w-20 h-10 px-1 text-xl text-right`}
+					></div>
+
 					<div className="w-full">
 						<h3 className="h-4 bg-gray-200 rounded-md dark:bg-gray-700"></h3>
 
@@ -166,23 +122,24 @@ const SkeletonRow = () => {
 			<td>
 				<p className="h-4 w-4/5 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
 			</td>
+			<th>
+				<p className="h-4 w-4/5 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+			</th>
 		</tr>
 	);
 };
 
-const TableHeaderFooter = () => {
+export const TableHeaderFooter = () => {
 	return (
 		<>
-			<tr className="max-[450px]:hidden bg-primary">
-				<th></th>
-				<th>Hit Date & Time</th>
-				<th>Note Information</th>
-				<th>City</th>
-				<th>User</th>
-				<th>Matched</th>
+			<tr className="max-[450px]:hidden">
+				<th className="sticky h-50"></th>
+				<th className="sticky h-50">Hit Date & Time</th>
+				<th className="sticky h-50">Note Information</th>
+				<th className="sticky h-50">City</th>
+				<th className="sticky h-50">User</th>
+				<th className="sticky h-50">Matched</th>
 			</tr>
 		</>
 	);
 };
-
-export default MyHitsTable;

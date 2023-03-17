@@ -1,15 +1,19 @@
 import Link from "next/link";
-import { default as LiveNote, default as StatTable } from "./LiveNote";
-import LiveHits from "./LiveHits";
+import TopUsers from "./TopUsers";
+import { default as LiveNote } from "./LiveNote";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 const Banner = () => {
+	const [lastUpdated, setLastUpdated] = useState<number>(0);
+
 	return (
 		<section>
 			<div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-					<div className="bg-primary  p-8 md:p-12 lg:px-16 lg:py-24">
+					<div className="bg-secondary p-8 md:p-12 lg:px-16 lg:py-24">
 						<div className="mx-auto max-w-xl text-center">
-							<h2 className="text-2xl font-bold text-white md:text-3xl">
+							<h2 className="text-2xl font-bold text-white md:text-3xl devnagiri">
 								Follow your Rupee in their Track
 							</h2>
 
@@ -25,7 +29,7 @@ const Banner = () => {
 									href="/entry"
 									className="inline-block rounded border border-white bg-white px-12 py-3 text-sm font-medium text-primary transition hover:bg-transparent hover:text-white focus:outline-none focus:ring focus:ring-yellow-400"
 								>
-									Get Started Today
+									Enter Notes Now
 								</Link>
 							</div>
 						</div>
@@ -33,16 +37,21 @@ const Banner = () => {
 
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2">
 						<div className="flex flex-col gap-4">
-							<h1 className="text-2xl font-bold text-primary md:text-3xl">
+							<h1 className="text-2xl font-bold text-primary md:text-3xl devnagiri">
 								Live Enteries
 							</h1>
 							<LiveNote />
 						</div>
 						<div className="flex flex-col gap-4">
-							<h1 className="text-2xl font-bold text-primary md:text-3xl">
-								Live Hits
+							<h1 className="text-2xl font-bold text-primary md:text-3xl devnagiri whitespace-nowrap">
+								Top Users{" "}
+								{lastUpdated && (
+									<span className="text-sm">
+										(Updated {dayjs(lastUpdated * 1000).fromNow(true)} ago)
+									</span>
+								)}
 							</h1>
-							<LiveHits />
+							<TopUsers setLastUpdated={setLastUpdated} />
 						</div>
 					</div>
 				</div>

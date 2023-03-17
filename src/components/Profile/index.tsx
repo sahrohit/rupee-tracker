@@ -4,8 +4,9 @@ import {
 	collection,
 	getCountFromServer,
 	query,
-	where
+	where,
 } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
 import MyHitsTable from "./MyHits";
@@ -18,10 +19,18 @@ interface ProfileSectionProps {
 }
 
 const ProfileSection = ({ user }: ProfileSectionProps) => {
+	const router = useRouter();
+
 	const [hits, setHits] = useState<number>();
 	const [showTab, setShowTab] = useState<"dashboard" | "hits" | "notes">(
-		"dashboard"
+		(router.query?.section as "dashboard" | "hits" | "notes") || "dashboard"
 	);
+
+	useEffect(() => {
+		if (router.query?.section) {
+			setShowTab(router.query?.section as "dashboard" | "hits" | "notes");
+		}
+	}, [router.query?.section]);
 
 	useEffect(() => {
 		const callThisNow = async () => {
@@ -52,7 +61,12 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
 							className={`tab tab-bordered text-xl ${
 								showTab === "dashboard" && "tab-active"
 							}`}
-							onClick={() => setShowTab("dashboard")}
+							onClick={() => {
+								setShowTab("dashboard");
+								router.push("/profile?section=dashboard", undefined, {
+									shallow: true,
+								});
+							}}
 						>
 							Dashboard
 						</button>
@@ -60,7 +74,12 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
 							className={`tab tab-bordered text-xl ${
 								showTab === "notes" && "tab-active"
 							}`}
-							onClick={() => setShowTab("notes")}
+							onClick={() => {
+								setShowTab("notes");
+								router.push("/profile?section=notes", undefined, {
+									shallow: false,
+								});
+							}}
 						>
 							My Notes
 						</button>
@@ -68,7 +87,12 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
 							className={`tab tab-bordered text-xl ${
 								showTab === "hits" && "tab-active"
 							}`}
-							onClick={() => setShowTab("hits")}
+							onClick={() => {
+								setShowTab("hits");
+								router.push("/profile?section=hits", undefined, {
+									shallow: true,
+								});
+							}}
 						>
 							My Hits
 						</button>
