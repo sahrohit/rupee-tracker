@@ -5,7 +5,7 @@ import { BsFacebook, BsTwitter, BsYoutube } from "react-icons/bs";
 const Footer = () => {
 	return (
 		<>
-			<footer className="footer p-10 mt-8">
+			<footer className="footer mx-auto max-w-screen-xl px-4 py-6 sm:py-6 sm:px-12 lg:px-8">
 				<div>
 					<Logo />
 					<p>
@@ -29,7 +29,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</footer>
-			<p className="text-center my-2 text-sm">
+			<p className="text-center my-2">
 				Inspired from{" "}
 				<a href="https://wheresgeorge.com/" target="_blank">
 					Where`s George
