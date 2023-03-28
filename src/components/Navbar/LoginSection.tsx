@@ -16,9 +16,9 @@ const LoginSection = () => {
 	}, [error]);
 
 	return (
-		<div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+		<div className="mt-4 flex flex-col gap-4 sm:mt-0 md:flex-row sm:items-center">
 			<button
-				className="inline-flex items-center justify-center roundedLg border border-gray-200 px-5 py-3 text-gray-500 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring"
+				className="btn btn-wide btn-primary rounded-none"
 				type="button"
 				onClick={() => signInWithGoogle()}
 			>
@@ -31,7 +31,7 @@ const LoginSection = () => {
 			</button>
 
 			<Link href="auth/login" passHref>
-				<button className="w-full block roundedLg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring">
+				<button className="btn bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring btn-wide">
 					Continue with Email
 				</button>
 			</Link>

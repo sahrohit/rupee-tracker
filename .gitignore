@@ -35,10 +35,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# firebase
 firebase-admin-key.json
 
-.vs
-
+#Environment Variables
 .env
 .env.local
 .env.development
@@ -47,4 +47,8 @@ firebase-admin-key.json
 .env.test.local
 .env.production
 .env.production.local
+
+#Visual Studio Code
+.vs
+.vscode
 

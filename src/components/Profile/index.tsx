@@ -54,52 +54,47 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
 
 	return (
 		<section>
-			<div className="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
-				<div className="lg:col-span-2 lg:py-8">
-					<div className="w-full tabs ">
-						<button
-							className={`tab tab-bordered text-xl ${
-								showTab === "dashboard" && "tab-active"
-							}`}
-							onClick={() => {
-								setShowTab("dashboard");
-								router.push("/profile?section=dashboard", undefined, {
-									shallow: true,
-								});
-							}}
-						>
-							Dashboard
-						</button>
-						<button
-							className={`tab tab-bordered text-xl ${
-								showTab === "notes" && "tab-active"
-							}`}
-							onClick={() => {
-								setShowTab("notes");
-								router.push("/profile?section=notes", undefined, {
-									shallow: false,
-								});
-							}}
-						>
-							My Notes
-						</button>
-						<button
-							className={`tab tab-bordered text-xl ${
-								showTab === "hits" && "tab-active"
-							}`}
-							onClick={() => {
-								setShowTab("hits");
-								router.push("/profile?section=hits", undefined, {
-									shallow: true,
-								});
-							}}
-						>
-							My Hits
-						</button>
-					</div>
-					<div className="  px-2">
-						<ShowingTab />
-					</div>
+			<div className="max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:px-8 mx-auto">
+				<div className="tabs tabs-boxed max-[450px]:mb-4 sticky top-0 z-10 justify-center max-[450px]:justify-around py-4">
+					<button
+						type="button"
+						className={`tab text-xl ${showTab === "dashboard" && "tab-active"}`}
+						onClick={() => {
+							setShowTab("dashboard");
+							router.push("/profile?section=dashboard", undefined, {
+								shallow: true,
+							});
+						}}
+					>
+						Dashboard
+					</button>
+					<button
+						type="button"
+						className={`tab text-xl ${showTab === "notes" && "tab-active"}`}
+						onClick={() => {
+							setShowTab("notes");
+							router.push("/profile?section=notes", undefined, {
+								shallow: false,
+							});
+						}}
+					>
+						My Notes
+					</button>
+					<button
+						type="button"
+						className={`tab text-xl ${showTab === "hits" && "tab-active"}`}
+						onClick={() => {
+							setShowTab("hits");
+							router.push("/profile?section=hits", undefined, {
+								shallow: true,
+							});
+						}}
+					>
+						My Hits
+					</button>
+				</div>
+				<div className="  px-2">
+					<ShowingTab />
 				</div>
 			</div>
 		</section>

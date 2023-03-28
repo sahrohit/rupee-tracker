@@ -26,7 +26,7 @@ const MyHitsTable = () => {
 						<TableHeaderFooter />
 					</thead>
 
-					<tbody className="max-[450px]:border-2">
+					<tbody>
 						{loading
 							? Array(3)
 									.fill(" ")
@@ -81,7 +81,7 @@ interface TableRowProps {
 
 const TableRow = ({ note }: TableRowProps) => {
 	return (
-		<tr className="max-[450px]:flex max-[450px]:flex-col">
+		<tr className="max-[450px]:flex max-[450px]:flex-col max-[450px]:border-2 max-[450px]:my-2">
 			<td></td>
 
 			<td>
@@ -116,7 +116,7 @@ const TableRow = ({ note }: TableRowProps) => {
 				{note.new_user}
 				<div className="text-sm opacity-50">{note.last_user}</div>
 			</td>
-			<td>
+			<td className="max-[450px]:text-right">
 				{dayjs(note.new_timestamp.seconds * 1000).from(
 					dayjs(note.last_timestamp.seconds * 1000)
 				)}

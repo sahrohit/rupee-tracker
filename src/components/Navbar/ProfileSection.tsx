@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import Image from "next/image";
 import Link from "next/link";
 
 interface ProfileSectionProps {
@@ -7,17 +8,19 @@ interface ProfileSectionProps {
 
 const ProfileSection = ({ user }: ProfileSectionProps) => {
 	return (
-		<div className="flex flex-row gap-4 items-center mt-4 sm:mt-0">
+		<div className="flex flex-row gap-4 items-center mt-4 sm:mt-0 justify-between sm:justify-end">
 			<Link
 				href="/profile"
 				className="flex flex-col gap-4 sm:flex-row sm:items-center"
 			>
-				<div className="flex flex-row items-center gap-x-4">
+				<div className="flex flex-row items-center gap-x-4 ">
 					<div className="avatar">
 						<div className="w-12 rounded-full">
-							<img
+							<Image
 								src={user.photoURL || "https://picsum.photos/200/300"}
 								alt="profile"
+								width={48}
+								height={48}
 							/>
 						</div>
 					</div>

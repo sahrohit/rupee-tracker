@@ -2,6 +2,7 @@ import { colorFromDenomination } from "@/data/denomination";
 import { cesor } from "@/utils/censor";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
 dayjs.extend(relativeTime);
 
 interface NoteTableRow {
@@ -27,7 +28,7 @@ interface NoteTableRowProps {
 
 export const NoteTableRow = ({ note }: NoteTableRowProps) => {
 	return (
-		<tr className="max-[450px]:flex max-[450px]:flex-col">
+		<tr className="max-[450px]:flex max-[450px]:flex-col max-[450px]:border-2 max-[450px]:my-2">
 			<td></td>
 
 			<td>
@@ -57,8 +58,10 @@ export const NoteTableRow = ({ note }: NoteTableRowProps) => {
 			<td>{note.city}</td>
 			<td>{cesor(note.user)}</td>
 			<td>{note.comments}</td>
-			<th>
-				<button className="btn btn-ghost btn-xs">Details</button>
+			<th className="max-[450px]:text-right">
+				<Link className="btn btn-ghost btn-xs" href={`/note/${note.note}`}>
+					details
+				</Link>
 			</th>
 		</tr>
 	);
@@ -94,7 +97,7 @@ export const NoteSkeletonRow = () => {
 				</div>
 			</td>
 			<td>
-				<p className="h-4  mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
+				<p className="h-4 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
 
 				<div className="text-sm opacity-50">
 					{" "}

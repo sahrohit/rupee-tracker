@@ -1,5 +1,3 @@
-import { auth } from "@/firebase";
-import InputField from "@/ui/InputField";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,7 +9,10 @@ import {
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
+
 import LoadingSpinner from "../shared/LoadingSpinner";
+import { auth } from "@/firebase";
+import InputField from "@/ui/InputField";
 
 const LoginSchema = Yup.object().shape({
 	email: Yup.string().email("Invalid Email").required("Required"),
@@ -21,8 +22,7 @@ const LoginSchema = Yup.object().shape({
 const LoginForm = () => {
 	const router = useRouter();
 
-	const [signInWithGoogle, _guser, gloading, gerror] =
-		useSignInWithGoogle(auth);
+	const [signInWithGoogle, , , gerror] = useSignInWithGoogle(auth);
 
 	useEffect(() => {
 		if (gerror) {
@@ -32,7 +32,7 @@ const LoginForm = () => {
 
 	const { redirect } = router.query;
 
-	const [signInWithEmailAndPassword, _user, loading, error] =
+	const [signInWithEmailAndPassword, , loading, error] =
 		useSignInWithEmailAndPassword(auth);
 
 	return (
@@ -92,13 +92,10 @@ const LoginForm = () => {
 									className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
 								/>
 
-								<span className="text-sm text-gray-700">Remember Me</span>
+								<span className="text-sm">Remember Me</span>
 							</label>
 
-							<Link
-								href="/auth/forgot-password"
-								className="text-gray-700 underline"
-							>
+							<Link href="/auth/forgot-password" className="underline">
 								Forgot Password?
 							</Link>
 						</div>
@@ -116,7 +113,7 @@ const LoginForm = () => {
 
 							<p className="mt-4 text-sm text-gray-500 sm:mt-0">
 								Dont have an account?{" "}
-								<Link href="/auth/register" className="text-gray-700 underline">
+								<Link href="/auth/register" className="underline">
 									Sign Up
 								</Link>
 								.
@@ -124,7 +121,7 @@ const LoginForm = () => {
 						</div>
 					</Form>
 					<button
-						className="w-full mt-2 inline-flex items-center justify-center roundedLg border border-gray-200 px-5 py-3 text-gray-500 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring"
+						className="w-full mt-2 inline-flex items-center justify-center roundedLg border border-gray-200 px-5 py-3 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring"
 						type="button"
 						onClick={() => signInWithGoogle()}
 					>

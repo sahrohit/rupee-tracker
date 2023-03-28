@@ -38,7 +38,7 @@ interface TableRowProps {
 
 export const TableRow = ({ note }: TableRowProps) => {
 	return (
-		<tr className="max-[450px]:flex max-[450px]:flex-col">
+		<tr className="max-[450px]:flex max-[450px]:flex-col max-[450px]:border-2 max-[450px]:my-2">
 			<td></td>
 
 			<td>
@@ -122,9 +122,6 @@ export const SkeletonRow = () => {
 			<td>
 				<p className="h-4 w-4/5 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
 			</td>
-			<th>
-				<p className="h-4 w-4/5 mt-1 bg-gray-200 rounded-md dark:bg-gray-700"></p>
-			</th>
 		</tr>
 	);
 };

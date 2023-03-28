@@ -12,6 +12,7 @@ import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { toast } from "react-hot-toast";
 import { GoVerified } from "react-icons/go";
+import Image from "next/image";
 
 const Dashboard = () => {
 	const [user] = useAuthState(auth);
@@ -61,7 +62,12 @@ const Dashboard = () => {
 				<div>
 					<div className="avatar">
 						<div className="w-24 rounded-xl">
-							<img src={user?.photoURL || "https://picsum.photos/200/300"} alt="profile" />
+							<Image
+								src={user?.photoURL || "https://picsum.photos/200/300"}
+								alt="profile"
+								width={96}
+								height={96}
+							/>
 						</div>
 					</div>
 					<h2 className="text-xl font-bold sm:text-3xl">{user?.displayName}</h2>

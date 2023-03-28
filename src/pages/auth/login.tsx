@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import LoginForm from "@/components/Auth/LoginForm";
 import { withAuthPages } from "@/utils/routes";
 import Link from "next/link";
 
 const LoginPage = () => {
 	return (
-		<section className="bg-white">
+		<section className="">
 			<div className="lg:grid lg:min-h-screen lg:grid-cols-12">
 				<aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
 					<img
@@ -34,7 +35,7 @@ const LoginPage = () => {
 							</svg>
 						</Link>
 
-						<h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+						<h1 className="mt-6 text-2xl font-bold sm:text-3xl md:text-4xl">
 							Welcome to Rupee Tracker 💵
 						</h1>
 

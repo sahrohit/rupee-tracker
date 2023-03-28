@@ -29,7 +29,7 @@ const MyNotesTable = () => {
 						<TableHeaderFooter />
 					</thead>
 
-					<tbody className="max-[450px]:border-2">
+					<tbody className="gap-2">
 						{loading
 							? Array(3)
 									.fill(" ")
@@ -73,7 +73,7 @@ interface TableRowProps {
 
 const TableRow = ({ note }: TableRowProps) => {
 	return (
-		<tr className="max-[450px]:flex max-[450px]:flex-col">
+		<tr className="max-[450px]:flex max-[450px]:flex-col max-[450px]:border-2 max-[450px]:my-2">
 			<td>
 				<div className="flex items-center space-x-3">
 					<div
@@ -99,7 +99,7 @@ const TableRow = ({ note }: TableRowProps) => {
 				</span>
 			</td>
 			<td>{note.city}</td>
-			<th>
+			<th className="max-[450px]:text-right">
 				<Link className="btn btn-ghost btn-xs" href={`/note/${note.note}`}>
 					details
 				</Link>

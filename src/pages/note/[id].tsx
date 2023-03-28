@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { YEARS, noteFromDenomination } from "@/data/notedata";
 import { numberToNepali } from "@/data/number";
 import { db } from "@/firebase";

@@ -36,7 +36,7 @@ const HitsPage = () => {
 							<TableHeaderFooter />
 						</thead>
 
-						<tbody className="max-[450px]:border-2">
+						<tbody >
 							{loading
 								? Array(10)
 										.fill(" ")

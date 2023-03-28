@@ -22,7 +22,7 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
-	const [createUserWithEmailAndPassword, user, loading, error] =
+	const [createUserWithEmailAndPassword, , loading, error] =
 		useCreateUserWithEmailAndPassword(auth);
 
 	return (
@@ -115,9 +115,8 @@ const RegisterForm = () => {
 								className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
 							/>
 
-							<span className="text-sm text-gray-700">
-								I want to receive emails about events, product updates and
-								company announcements.
+							<span className="text-sm">
+								Ticking this wont make any difference.
 							</span>
 						</label>
 					</div>
@@ -130,6 +129,7 @@ const RegisterForm = () => {
 
 					<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
 						<button
+							type="submit"
 							className={`btn btn-primary px-16 ${
 								(isSubmitting || loading) && `btn-disabled`
 							}`}
@@ -138,9 +138,9 @@ const RegisterForm = () => {
 							Create an account
 						</button>
 
-						<p className="mt-4 text-sm text-gray-500 sm:mt-0">
+						<p className="mt-4 text-sm sm:mt-0">
 							Already have an account?{" "}
-							<Link href="/auth/login" className="text-gray-700 underline">
+							<Link href="/auth/login" className="text-gray-500 underline">
 								Log in
 							</Link>
 							.
