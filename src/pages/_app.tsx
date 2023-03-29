@@ -1,13 +1,13 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "next-themes";
-import DarkModeSwitch from "@/utils/DarkModeSwitch";
-import Head from "next/head";
-import { DefaultSeo } from "next-seo";
-import defaultSEOConfig from "../../next-seo.config";
-import Script from "next/script";
 import * as gtag from "@/lib/gtag";
+import "@/styles/globals.css";
+import DarkModeSwitch from "@/utils/DarkModeSwitch";
+import { DefaultSeo } from "next-seo";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import Script from "next/script";
+import { Toaster } from "react-hot-toast";
+import defaultSEOConfig from "../../next-seo.config";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -17,6 +17,13 @@ export default function App({ Component, pageProps }: AppProps) {
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 				/>
+				<link rel="manifest" href="/manifest.json" />
+				<link
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href="icons/icon-180x180.png"
+				/>
+				<meta name="theme-color" content="#ffffff" />
 			</Head>
 			<DefaultSeo {...defaultSEOConfig} />
 			<Script
