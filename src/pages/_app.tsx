@@ -18,12 +18,24 @@ export default function App({ Component, pageProps }: AppProps) {
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
 				/>
 				<link rel="manifest" href="/manifest.json" />
+				<meta name="theme-color" content="#ffffff" />
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
-					href="icons/icon-180x180.png"
+					href="icons/apple-touch-icon.png"
 				/>
-				<meta name="theme-color" content="#ffffff" />
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="32x32"
+					href="icons/favicon-32x32.png"
+				/>
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="16x16"
+					href="icons/favicon-16x16.png"
+				/>
 			</Head>
 			<DefaultSeo {...defaultSEOConfig} />
 			<Script
