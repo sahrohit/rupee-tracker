@@ -11,8 +11,9 @@ const DarkModeSwitch = () => {
 	if (!mounted) return null;
 
 	return (
-		<label className="swap swap-rotate">
+		<label className="swap swap-rotate" htmlFor="theme-switch">
 			<input
+				id="theme-switch"
 				type="checkbox"
 				onClick={() =>
 					setTheme(theme === __light_theme__ ? __dark_theme__ : __light_theme__)
