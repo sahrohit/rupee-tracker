@@ -17,16 +17,25 @@ const Footer = () => {
 				<div>
 					<span className="footer-title">Social</span>
 					<div className="grid grid-flow-col gap-6">
-						<a href="https://twitter.com/rupee_tracker" target="_blank">
+						<a
+							href="https://twitter.com/rupee_tracker"
+							aria-label="Take you to our Twitter Page"
+							target="_blank"
+						>
 							<BsTwitter className="scale-[2]" />
 						</a>
 						<a
 							href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+							aria-label="Take you to our Youtube Page"
 							target="_blank"
 						>
 							<BsYoutube className="scale-[2]" />
 						</a>
-						<a href="https://www.facebook.com/" target="_blank">
+						<a
+							href="https://www.facebook.com/"
+							aria-label="Take you to our Facebook Page"
+							target="_blank"
+						>
 							<BsFacebook className="scale-[2]" />
 						</a>
 					</div>

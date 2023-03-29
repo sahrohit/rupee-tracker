@@ -11,7 +11,11 @@ const DarkModeSwitch = () => {
 	if (!mounted) return null;
 
 	return (
-		<label className="swap swap-rotate" htmlFor="theme-switch">
+		<label
+			className="swap swap-rotate"
+			htmlFor="theme-switch"
+			aria-label="Theme Switch"
+		>
 			<input
 				id="theme-switch"
 				type="checkbox"
