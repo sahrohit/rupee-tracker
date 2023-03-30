@@ -49,3 +49,15 @@ html {
 .strokeme {
 	text-shadow: -1px -1px 0, 1px -1px 0, -1px 1px 0, 1px 1px 0;
 }
+
+/* Flame Icon SVG CSS */
+.st0 {
+	fill-rule: evenodd;
+	clip-rule: evenodd;
+	fill: #ec6f59;
+}
+.st1 {
+	fill-rule: evenodd;
+	clip-rule: evenodd;
+	fill: #fad15c;
+}

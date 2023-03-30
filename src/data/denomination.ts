@@ -4,11 +4,23 @@ export const DENOMINATIONS = [
 	{ value: 5, label: "5", color: "#d56d78", tailwind_color: "bg-red-300" },
 	{ value: 10, label: "10", color: "#ccb8b3", tailwind_color: "bg-stone-300" },
 	{ value: 20, label: "20", color: "#ba5639", tailwind_color: "bg-orange-300" },
+	{
+		value: 25,
+		label: "25",
+		color: "#c6c4a3",
+		tailwind_color: "bg-zinc-500",
+	},
 	{ value: 50, label: "50", color: "#5386b1", tailwind_color: "bg-sky-300" },
 	{
 		value: 100,
 		label: "100",
 		color: "#c5d7bd",
+		tailwind_color: "bg-green-300",
+	},
+	{
+		value: 250,
+		label: "250",
+		color: "#305b70",
 		tailwind_color: "bg-green-300",
 	},
 	{
@@ -41,10 +53,14 @@ export const colorFromDenominationRadio = (denomination: number) => {
 			return "peer-checked:bg-stone-300";
 		case 20:
 			return "peer-checked:bg-orange-300";
+		case 25:
+			return "peer-checked:bg-zinc-500";
 		case 50:
 			return "peer-checked:bg-sky-300";
 		case 100:
 			return "peer-checked:bg-green-400";
+		case 250:
+			return "peer-checked:bg-teal-800";
 		case 500:
 			return "peer-checked:bg-stone-400";
 		case 1000:
