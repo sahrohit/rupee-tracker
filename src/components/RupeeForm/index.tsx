@@ -91,7 +91,7 @@ const RupeeForm = () => {
 			)
 		);
 
-		if (!querySnapshot.empty) {
+		if (!querySnapshot.empty && querySnapshot.docs[0].data().user !== user?.email?.split("@")[0]) {
 			const snapData = querySnapshot.docs[0].data();
 			const newData = prefixObject("last_", {
 				city: snapData.city,
