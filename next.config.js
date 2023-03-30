@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 
+const { withAxiom } = require('next-axiom');
 const runtimeCaching = require("next-pwa/cache");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
 	enabled: process.env.ANALYZE === "true",
@@ -24,4 +25,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withBundleAnalyzer(withPWA(nextConfig))
+module.exports = module.exports = withAxiom(withBundleAnalyzer(withPWA(nextConfig)))
