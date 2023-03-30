@@ -14,7 +14,7 @@ import {
 	serverTimestamp,
 	setDoc,
 } from "firebase/firestore";
-import { Form, Formik, FormikValues } from "formik";
+import { Form, Formik, FormikHelpers, FormikValues } from "formik";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-hot-toast";
 import * as Yup from "yup";
@@ -54,7 +54,10 @@ const RupeeFormSchema = Yup.object().shape({
 const RupeeForm = () => {
 	const [user] = useAuthState(auth);
 
-	const handleSubmit = async (values: FormikValues, actions: any) => {
+	const handleSubmit = async (
+		values: FormikValues,
+		actions: FormikHelpers<typeof INITIAL_VALUES>
+	) => {
 		const toastId = toast.loading("Submitting...");
 
 		const prefix_data = {
@@ -129,6 +132,7 @@ const RupeeForm = () => {
 			});
 		}
 		actions.setSubmitting(false);
+		actions.resetForm();
 		toast.success("Successfully Added", {
 			id: toastId,
 		});
