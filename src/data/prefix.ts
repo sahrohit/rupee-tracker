@@ -61,5 +61,11 @@ export const get_ro_name = (de_name: string) => {
 
 export const get_prefix = (value: string) => {
 	const prefix = NOTE_PREFIX.find((item) => item.value === value);
-	return { ro_name: prefix?.ro_name, de_name: prefix?.de_name};
-}
+	return { ro_name: prefix?.ro_name, de_name: prefix?.de_name };
+};
+
+export const convert_to_de = (value: string) => {
+	const [prefix_test, prefix_number, serial_number] = value.split("-");
+	const de_prefix = get_de_name(prefix_test);
+	return de_prefix + "-" + prefix_number + "-" + serial_number;
+};

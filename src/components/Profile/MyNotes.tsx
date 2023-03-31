@@ -1,4 +1,5 @@
 import { colorFromDenomination } from "@/data/denomination";
+import { convert_to_de } from "@/data/prefix";
 import { auth, db } from "@/firebase";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -84,7 +85,7 @@ const TableRow = ({ note }: TableRowProps) => {
 						{note.denomination_value}
 					</div>
 					<div>
-						<div className="font-bold">{note.note}</div>
+						<div className="font-bold">{convert_to_de(note.note)}</div>
 						<div className="text-sm opacity-50">
 							Rs {note.denomination_value}
 						</div>

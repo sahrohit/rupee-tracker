@@ -1,6 +1,4 @@
-import {
-	colorFromDenominationRadio
-} from "@/data/denomination";
+import { colorFromDenominationRadio } from "@/data/denomination";
 import { useField } from "formik";
 import { InputHTMLAttributes, useId } from "react";
 

@@ -1,3 +1,4 @@
+import { convert_to_de } from "@/data/prefix";
 import { db } from "@/firebase";
 import { cesor } from "@/utils/censor";
 import { collectionGroup, limit, orderBy, query } from "firebase/firestore";
@@ -47,7 +48,9 @@ const LiveNote = () => {
 								<td className="whitespace-nowrap px-4 py-2 font-medium ">
 									{cesor(note.user)}
 								</td>
-								<td className="whitespace-nowrap px-4 py-2">{note.note}</td>
+								<td className="whitespace-nowrap px-4 py-2">
+									{convert_to_de(note.note)}
+								</td>
 							</tr>
 					  ))}
 			</tbody>

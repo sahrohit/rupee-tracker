@@ -1,4 +1,5 @@
 import { colorFromDenomination } from "@/data/denomination";
+import { convert_to_de } from "@/data/prefix";
 import { auth, db } from "@/firebase";
 import dayjs from "dayjs";
 import { collection, query, where } from "firebase/firestore";
@@ -101,7 +102,11 @@ const TableRow = ({ note }: TableRowProps) => {
 						{note.denomination_value}
 					</div>
 					<div>
-						<div className="font-bold">{`${note.prefix_ro_name}-${note.prefix_number}-${note.serial_number}`}</div>
+						<div className="font-bold">
+							{convert_to_de(
+								`${note.prefix_ro_name}-${note.prefix_number}-${note.serial_number}`
+							)}
+						</div>
 						<div className="text-sm opacity-50">
 							Rs {note.denomination_value}
 						</div>
