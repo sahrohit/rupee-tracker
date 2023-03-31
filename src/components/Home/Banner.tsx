@@ -3,6 +3,8 @@ import TopUsers from "./TopUsers";
 import { default as LiveNote } from "./LiveNote";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { BiStats } from "react-icons/bi";
+import { MdStart } from "react-icons/md";
 
 const Banner = () => {
 	const [lastUpdated, setLastUpdated] = useState<number>(0);
@@ -24,12 +26,20 @@ const Banner = () => {
 								obtain into RupeeTracker.
 							</p>
 
-							<div className="mt-4 md:mt-8">
+							<div className="flex flex-row flex-wrap justify-center mt-4 md:mt-8 gap-4">
 								<Link
 									href="/entry"
-									className="inline-block rounded border border-white bg-white px-12 py-3 text-sm font-medium text-primary transition hover:bg-transparent hover:text-white focus:outline-none focus:ring focus:ring-yellow-400"
+									className="rounded border border-white bg-white px-12 py-3 text-md font-medium text-primary transition hover:bg-transparent hover:text-white focus:outline-none focus:ring focus:ring-yellow-400 flex flex-row items-center gap-2"
 								>
-									Enter Notes Now
+									<MdStart className="text-xl" />
+									Enter Notes
+								</Link>
+								<Link
+									href="/stats"
+									className="rounded border border-white bg-white px-12 py-3 text-md font-medium text-primary transition hover:bg-transparent hover:text-white focus:outline-none focus:ring focus:ring-yellow-400 flex flex-row items-center gap-2"
+								>
+									<BiStats className="text-xl" />
+									Search & Stats
 								</Link>
 							</div>
 						</div>

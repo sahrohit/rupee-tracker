@@ -59,12 +59,19 @@ const Note = () => {
 							Try searching again, or return home to start from the beginning.
 						</p>
 
-						<Link
-							href="/"
-							className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring"
-						>
-							Go Back Home
-						</Link>
+						<div className="flex flex-row flex-wrap gap-2 justify-center">
+							<button
+								onClick={() => {
+									router.back();
+								}}
+								className="btn btn-wide btn-primary mt-8"
+							>
+								Go Back
+							</button>
+							<Link className="btn btn-wide btn-primary mt-8" href="/" passHref>
+								Go Home
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
