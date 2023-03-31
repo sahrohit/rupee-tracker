@@ -4,11 +4,10 @@ import LoginSection from "./LoginSection";
 import ProfileSection from "./ProfileSection";
 import Link from "next/link";
 import Logo from "../shared/Logo";
+import LoadingSpinner from "../shared/LoadingSpinner";
 
 const Navbar = () => {
 	const [user, loading, error] = useAuthState(auth);
-
-	if (loading) return <div>Loading...</div>;
 
 	if (error)
 		return (
@@ -30,7 +29,13 @@ const Navbar = () => {
 						<Logo />
 					</Link>
 
-					{user ? <ProfileSection user={user} /> : <LoginSection />}
+					{loading ? (
+						<LoadingSpinner />
+					) : user ? (
+						<ProfileSection user={user} />
+					) : (
+						<LoginSection />
+					)}
 				</div>
 			</div>
 		</header>

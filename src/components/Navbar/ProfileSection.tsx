@@ -11,7 +11,8 @@ const ProfileSection = ({ user }: ProfileSectionProps) => {
 		<div className="flex flex-row gap-4 items-center mt-4 sm:mt-0 justify-between sm:justify-end">
 			<Link
 				href="/profile"
-				className="flex flex-col gap-4 sm:flex-row sm:items-center"
+				className="flex flex-col gap-4 sm:flex-row sm:items-center tooltip tooltip-bottom hover:tooltip-open"
+				data-tip="Dashboard"
 			>
 				<div className="flex flex-row items-center gap-x-4 ">
 					<div className="avatar">
