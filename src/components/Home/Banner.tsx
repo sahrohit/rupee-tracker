@@ -53,14 +53,24 @@ const Banner = () => {
 							<LiveNote />
 						</div>
 						<div className="flex flex-col gap-4">
-							<h1 className="text-2xl font-bold text-primary md:text-3xl devnagiri whitespace-nowrap">
-								Top Users{" "}
-								{lastUpdated && (
-									<span className="text-sm">
-										(Updated {dayjs(lastUpdated * 1000).fromNow(true)} ago)
-									</span>
-								)}
-							</h1>
+							<div
+								className="tooltip hover:tooltip-open tooltip-top cursor-pointer"
+								data-tip="Click here to refresh"
+								onClick={async () => {
+									await fetch("/api/countuser", {
+										method: "GET",
+									});
+								}}
+							>
+								<h1 className="text-2xl font-bold text-primary md:text-3xl devnagiri whitespace-nowrap">
+									Top Users{" "}
+									{lastUpdated && (
+										<span className="text-sm">
+											(Updated {dayjs(lastUpdated * 1000).fromNow(true)} ago)
+										</span>
+									)}
+								</h1>
+							</div>
 							<TopUsers setLastUpdated={setLastUpdated} />
 						</div>
 					</div>
